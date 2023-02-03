@@ -1,6 +1,6 @@
 package com.springevents.springevents.controller;
 
-import com.springevents.springevents.event.ProductRegisteredEvent;
+import com.springevents.springevents.event.CalculationRegisteredEvent;
 import com.springevents.springevents.model.Calculation;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;
@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/v1/calculations")
-public class ProductController implements ApplicationEventPublisherAware {
+public class CalculationController implements ApplicationEventPublisherAware {
     private ApplicationEventPublisher publisher;
 
     @PostMapping(path = "add")
     public void addNumbers(@RequestBody Calculation calculation) {
         float firstNumber = calculation.getFirstNumber();
         float secondNumber = calculation.getSecondNumber();
-        publisher.publishEvent(new ProductRegisteredEvent(
+        publisher.publishEvent(new CalculationRegisteredEvent(
                 this, firstNumber, secondNumber, firstNumber + secondNumber));
     }
 
@@ -26,7 +26,7 @@ public class ProductController implements ApplicationEventPublisherAware {
     public void subtractNumbers(@RequestBody Calculation calculation) {
         float firstNumber = calculation.getFirstNumber();
         float secondNumber = calculation.getSecondNumber();
-        publisher.publishEvent(new ProductRegisteredEvent(
+        publisher.publishEvent(new CalculationRegisteredEvent(
                 this, firstNumber, secondNumber, firstNumber - secondNumber));
     }
 
@@ -34,7 +34,7 @@ public class ProductController implements ApplicationEventPublisherAware {
     public void multipleNumbers(@RequestBody Calculation calculation) {
         float firstNumber = calculation.getFirstNumber();
         float secondNumber = calculation.getSecondNumber();
-        publisher.publishEvent(new ProductRegisteredEvent(
+        publisher.publishEvent(new CalculationRegisteredEvent(
                 this, firstNumber, secondNumber, firstNumber * secondNumber));
     }
 
@@ -42,7 +42,7 @@ public class ProductController implements ApplicationEventPublisherAware {
     public void divideNumbers(@RequestBody Calculation calculation) {
         float firstNumber = calculation.getFirstNumber();
         float secondNumber = calculation.getSecondNumber();
-        publisher.publishEvent(new ProductRegisteredEvent(
+        publisher.publishEvent(new CalculationRegisteredEvent(
                 this, firstNumber, secondNumber, firstNumber / secondNumber));
     }
 
